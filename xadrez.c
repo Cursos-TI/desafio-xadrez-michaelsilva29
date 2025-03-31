@@ -2,7 +2,7 @@
 
 int main(){
 
-    int bispo = 1, torre = 1, rainha;  // Variáveis 
+    int bispo = 1, torre = 1, rainha, movimentoCavalo, cavalo;  // Variáveis 
 
 
     printf("A Torre se Move 5 vezes para a direita\n");
@@ -24,12 +24,25 @@ int main(){
 
     } while (bispo <= 5); // Condição para que o looping continue rodando, enquanto o bispo valer menos ou igual a 5
 
-    printf("\n");
+    printf("\n"); // Comando para pular 1 linha
     printf("A Rainha se move 8 casas para a esquerda\n");
 
     for (rainha = 1; rainha <= 8; rainha ++)   // Estrutura de repetição com a variável recebendo valor, condição e incremento
     {
         printf("esquerda\n");  // Movimento da rainha
+
+    }
+
+    printf("\n"); // Comando para pular 1 linha
+    printf("O cavalo se move em forma de "L", duas casas na horizontal ou vertical e uma casa para o lado");
+
+    for (movimentoCavalo = 0; movimentoCavalo < 1; movimentoCavalo++){ // Estrutura de repetição com a variável recebendo valor, condição e incremento
+        for (cavalo = 0; cavalo < 2; cavalo++){
+            printf("Baixo"); // Movimento será feito para baixo quantas vezes a estrutura de repetição indicar
+            
+        }
+
+        printf("Esquerda"); // Movimento será feito para a esquerda quantas vezes a estrutura de repetição indicar
 
     }
 
