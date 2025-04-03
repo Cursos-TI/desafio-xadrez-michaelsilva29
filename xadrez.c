@@ -1,51 +1,73 @@
-# include <stdio.h>
+#include <stdio.h>  // Inclusão da biblioteca padrão de entrada/saída
 
-int main(){
-
-    int bispo = 1, torre = 1, rainha, movimentoCavalo, cavalo;  // Variáveis 
-
-
-    printf("A Torre se Move 5 vezes para a direita\n");
-    while (torre <= 5){    // Estrutua de Repetição para gerar o movimento da torre, enquanto a variável for menor ou igual a 5
-                            // Enquanto a condição for verdadeira o looping continuará rodando
-        printf("Direita\n"); 
-        torre ++;    // incremento para fazer a estruta de repetição rodar
+// Função que simula o movimento do bispo no xadrez
+void movimentoBispo(int cima, int direita) {
+    // Caso base: quando ambos os contadores chegam a zero
+    if (cima <= 0 && direita <= 0) {
+        return;  // Retorna sem fazer nada quando não há mais movimentos
     }
-
-    printf("\n"); // Comando para pular 1 linha
-    printf("O Bispo se move 5 vezes na diagonal\n");
-
-    do {   // Estrutura de Repetição para gerar o movimento da torre
-
-        printf("Cima\n");    // Direção do movimento do bispo
-        printf("Direita\n");
-        bispo ++; // incremento para fazer o looping girar
-
-
-    } while (bispo <= 5); // Condição para que o looping continue rodando, enquanto o bispo valer menos ou igual a 5
-
-    printf("\n"); // Comando para pular 1 linha
-    printf("A Rainha se move 8 casas para a esquerda\n");
-
-    for (rainha = 1; rainha <= 8; rainha ++)   // Estrutura de repetição com a variável recebendo valor, condição e incremento
-    {
-        printf("esquerda\n");  // Movimento da rainha
-
-    }
-
-    printf("\n"); // Comando para pular 1 linha
-    printf("O cavalo se move em forma de "L", duas casas na horizontal ou vertical e uma casa para o lado");
-
-    for (movimentoCavalo = 0; movimentoCavalo < 1; movimentoCavalo++){ // Loop externo , será executado depois que o loop interno executar completamente
-        for (cavalo = 0; cavalo < 2; cavalo++){ // Loop interno, que será executado antes do loop externo
-            printf("Baixo"); // Movimento será feito para baixo quantas vezes a estrutura de repetição indicar
-            
+    
+    // Loop for para movimentos para cima (agora com recursão)
+    for (; cima > 0; cima--) {
+        printf("Cima\n");  // Imprime movimento para cima
+        
+        // Loop for interno para movimentos para direita
+        for (int d = direita; d > 0; d--) {
+            printf("Direita\n");  // Imprime movimento para direita
         }
-
-        printf("Esquerda"); // Movimento será feito para a esquerda quantas vezes a estrutura de repetição indicar
-
+        
+        // Chamada recursiva com valores atualizados
+        movimentoBispo(cima - 1, direita);
+        return;  // Importante para não repetir chamadas desnecessárias
     }
+}
 
-return 0;
+// Função que simula o movimento da torre no xadrez
+void movimentoTorre(int direita){
+    // Loop while para movimentos horizontais
+    while (direita > 0){
+        printf("Direita\n");  // Imprime movimento para direita
+        movimentoTorre(direita - 1);  // Chamada recursiva
+        return;  // Retorna após uma iteração
+    }
+}
 
+// Função que simula o movimento da rainha no xadrez
+void movimentoRainha(int esquerda){
+    // Loop while para movimentos horizontais
+    while (esquerda > 0){
+        printf("Esquerda\n");  // Imprime movimento para esquerda
+        movimentoRainha(esquerda - 1);  // Chamada recursiva
+        return;  // Retorna após uma iteração
+    }
+}
+
+// Função principal do programa
+int main(){
+    // Demonstração do movimento do bispo
+    printf("Movimento do Bispo...!\n");  // Mensagem de cabeçalho
+    movimentoBispo(5, 1);  // Chama a função com parâmetros 5 e 1
+    printf("\n");  // Quebra de linha
+
+    // Demonstração do movimento da torre
+    printf("Movimento Torre...!\n");  // Mensagem de cabeçalho
+    movimentoTorre(5);  // Chama a função com parâmetro 5
+    printf("\n");  // Quebra de linha
+
+    // Demonstração do movimento da rainha
+    printf("Movimento Rainha...!\n");  // Mensagem de cabeçalho
+    movimentoRainha(8);  // Chama a função com parâmetro 8
+    printf("\n");  // Quebra de linha
+
+    // Demonstração do movimento do cavalo
+    printf("Movimento do Cavalo...!\n");  // Mensagem de cabeçalho
+    // Loop for para simular movimento em L (2 cima, 1 direita)
+    for (int direita = 1; direita > 0; direita--){
+        // Loop interno para movimento vertical
+        for (int cima = 2; cima > 0; cima--){
+            printf("Cima\n");  // Imprime movimento para cima
+        }
+        printf("Direita\n");  // Imprime movimento para direita
+    }
+    return 0;  // Retorno padrão indicando sucesso
 }
